@@ -11,30 +11,10 @@ const Container = styled('div')`
 
 
 const ButtonDiv = styled('div')`
-border: 0;
-outline: 0;
 background-color: whitesmoke;
-padding-top: 0.2rem;
-padding-bottom: 0.2rem;
-
-
-`
-const CenterButton = styled('div')`
-border: 0;
-outline: 0;
-
-  padding-top: 0.2rem;
-  padding-bottom: 0.2rem;
 `
 
-const InputDiv = styled('div')`
-border:0;
-outline: 0;
-height:30px;
 
-
-}
-`
 const SubDiv = styled('div')`
   display: flex;
   justify-content: center;
@@ -42,7 +22,8 @@ const SubDiv = styled('div')`
 
   & > input{
     border: 0;
-    outline: 0;}
+    outline: 0;
+  height: 27px}
 `
 
 const ConditionalDiv = styled('div')`
@@ -70,7 +51,7 @@ const ConditionalDiv = styled('div')`
     &::after {
       content: '';
       position: absolute;
-      top: 40%;
+      top: 35%;
       left: 103%;
       margin-left: -5px;
       border-width: 5px;
@@ -117,13 +98,18 @@ export class CustomInput extends Vue {
   setActiveState() {
     this.active = !this.active
   }
-  setCurrentField(value: string, icon: string) {
+  onSetCurrentField(value: string, icon: string) {
+    console.log("in function", value, icon)
     this.currentIcon = icon
     this.defaultInput = value
+    console.log('icon', this.currentIcon)
     this.hoverShow = !this.hoverShow
   }
-  checkField() {
-    if (this.validation['email'].test(this.inputValue)) {
+  
+  checkField(event:any) {
+    
+    if (this.validation[this.defaultInput].test(event.target.value)) {
+      console.log("in if condition")
       this.validator = true
       return
     }
@@ -150,22 +136,25 @@ export class CustomInput extends Vue {
     <ConditionalDiv>
       {this.hoverShow && <span class="popuptext show" id="myPopup">
         <Icon
-          setCurrentField={this.setCurrentField}
+          onSetCurrentField={this.onSetCurrentField}
           name="envelope"
           text="Link To Email"
           value="email"
+          hover={true}
         />
         <Icon
-          setCurrentField={this.setCurrentField}
+          onSetCurrentField={this.onSetCurrentField}
           name="file"
           text="Link To Page"
           value="page"
+          hover={true}
         />
         <Icon
-          setCurrentField={this.setCurrentField}
+          onSetCurrentField={this.onSetCurrentField}
           name="mobile"
           text="Link To Phone"
           value="phone"
+          hover={true}
         />
       </span>}
 
@@ -175,35 +164,38 @@ export class CustomInput extends Vue {
 <Button
    setState={this.setHoverState}
   // :class="hoverShow ? 'btn-active' : ''"
-  iconName="copy"
+  iconName={this.currentIcon}
 />
 </ButtonDiv>}
 
 
       <input
         onFocus={()=>this.toggleFocus(true)}
-        onKeyup={this.checkField}
+        onKeyup={(event:any)=>{
+       
+          this.checkField(event)}
+        }
         // v-model="inputValue"
         type="type"
         placeholder="URL"
       />
 
-      {this.focus&&<CenterButton>
+      {this.focus&&
 
 <Button
   setState={this.validator ? this.resetFocus() : null}
   // :class="validator ? 'validated' : null"
   iconName="check"
 />
-</CenterButton>}
-{(!this.focus&&this.validator)&&<CenterButton>
+}
+{(!this.focus&&this.validator)&&
 
  <Button
   setState={this.resetState}
   // :class="validator ? 'validated' : null"
   iconName="trash"
 />
-</CenterButton>}
+}
 
 {!this.focus &&<ButtonDiv>
 

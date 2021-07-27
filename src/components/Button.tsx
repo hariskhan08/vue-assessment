@@ -32,7 +32,7 @@ export class Button extends Vue {
   render() {
 
     return <Container>
-<button  onClick={this.setState}>
+<button onClick={this.setState}>
     <Icon name={this.iconName} />
   </button>
 

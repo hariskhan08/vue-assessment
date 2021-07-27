@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions'
 import { withKnobs, text, boolean } from '@storybook/addon-knobs'
-import MyInput from '../components/CustomInput.vue'
+import MyInput from '../components/CustomInput'
 
 export default {
   title: 'MyInput',
