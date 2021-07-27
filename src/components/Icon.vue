@@ -7,14 +7,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { styled } from '@egoist/vue-emotion'
+import { MainDiv } from '../styles/Icon.styles.jsx'
 
-const MainDiv = styled('div')`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`
 @Component({
   components: {
     MainDiv,
@@ -28,7 +22,6 @@ const MainDiv = styled('div')`
 })
 export default class Icon extends Vue {
   onClick() {
-    console.log('this', this)
     this.$emit('setCurrentField', this.$props.value, this.$props.name)
   }
 }

@@ -1,41 +1,31 @@
-  // <button @click="setState">
-  //   <Icon :iconName="iconName" />
-  // </button>
-
 import { Component, Vue } from 'vue-property-decorator'
 import Icon from './Icon.vue'
-import { styled } from '@egoist/vue-emotion'
-
-const Container = styled('div')`
-& > button{
-  outline:0;
-  border:0
-}
-& > button:active{
-  background: red;
-}
-`
-
-
+import { Container } from '../styles/Button.styles'
 @Component({
   components: {
     Icon,
-    Container
+    Container,
   },
   props: {
     iconName: String,
-    setState: Function
+    error: Boolean,
+    active: Boolean,
+    setState: Function,
   },
 })
 export class Button extends Vue {
-  
   render() {
-
-    return <Container>
-<button onClick={this.setState}>
-    <Icon name={this.iconName} />
-  </button>
-
-    </Container>
+    return (
+      <Container>
+        <button
+          class={`${!this.$props.error ? 'errorClass' : ''} ${
+            this.$props.active ? 'activeClass' : ''
+          }`}
+          onClick={this.setState}
+        >
+          <Icon name={this.iconName} />
+        </button>
+      </Container>
+    )
   }
 }
