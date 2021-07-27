@@ -24,8 +24,7 @@ import {
 })
 export class App extends Vue {
   backgroundColor = 'black'
-  buttonBackground = 'lightgrey'
-  buttonHover = 'grey'
+  buttonBackground = 'rgb(240, 242, 246);'
   settingsDropdown = false
 
   toggleDropdown() {
@@ -67,15 +66,6 @@ export class App extends Vue {
                     }}
                   />
                 </div>
-                {/* <div>
-          
-          <span>
-            Button Hover:
-          </span>
-          <input type="color" value={this.buttonHover} onChange={(event)=>{
-          this.buttonHover = event.target.value
-        }}/>
-        </div> */}
               </TooltipItem>
             </SubContainer>
           )}

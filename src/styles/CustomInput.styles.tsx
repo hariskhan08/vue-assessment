@@ -1,8 +1,12 @@
 import { styled } from '@egoist/vue-emotion'
 
 export const Container = styled('div')`
+  body {
+    font-family: sans-serif;
+  }
   border: 1px solid grey;
-  border-radius: 2px;
+  border-radius: 8px;
+  overflow: hidden;
 
   &.validated {
     border-color: orange;
@@ -20,10 +24,15 @@ export const SubDiv = styled('div')`
   & > input {
     border: 0;
     outline: 0;
-    height: 26px;
+    padding: 15px;
+    height: 16px;
   }
 `
 
+export const InputDiv = styled('div')`
+  border: 0;
+  outline: 0;
+`
 export const ConditionalDiv = styled('div')`
   position: relative;
   display: inline-block;
@@ -33,8 +42,22 @@ export const ConditionalDiv = styled('div')`
   -ms-user-select: none;
   user-select: none;
 
+  & .hoverState {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 35%;
+      left: 0%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: white transparent transparent transparent;
+      transform: rotate(-90deg);
+    }
+  }
   & .popuptext {
-    width: 160px;
+    overflow: hidden;
+    width: 130px;
     background-color: white;
     color: #fff;
     text-align: center;
@@ -42,20 +65,8 @@ export const ConditionalDiv = styled('div')`
 
     position: absolute;
     z-index: 1;
-    top: -147%;
-    left: -38%;
+    top: -47%;
+    left: -19%;
     margin-left: -80px;
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 35%;
-      left: 103%;
-      margin-left: -5px;
-      border-width: 5px;
-      border-style: solid;
-      border-color: white transparent transparent transparent;
-      transform: rotate(-90deg);
-    }
   }
 `

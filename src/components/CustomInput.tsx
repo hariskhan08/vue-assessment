@@ -47,13 +47,13 @@ export class CustomInput extends Vue {
   focus = false as boolean
   hoverShow = false as boolean
   active = false as boolean
-  defaultInput = 'url' as string
+  defaultInput = 'URL' as string
   currentIcon = 'paperclip' as string
   validation = {
     email: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     phone: /0[0-9]{10}/,
     page: /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
-    url: /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
+    URL: /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
   }
 
   toggleFocus(value: boolean) {
@@ -97,87 +97,93 @@ export class CustomInput extends Vue {
 
   render() {
     return (
-      <Container class={`${!this.validator && this.focus ? 'validated' : ''}`}>
+      <div>
         <ConditionalDiv>
-          {this.hoverShow && (
-            <span class='popuptext show' id='myPopup' ref='tooltip'>
-              <Icon
-                onSetCurrentField={this.onSetCurrentField}
-                name='envelope'
-                text='Link To Email'
-                value='email'
-                hover={true}
-              />
-              <Icon
-                onSetCurrentField={this.onSetCurrentField}
-                name='file'
-                text='Link To Page'
-                value='page'
-                hover={true}
-              />
-              <Icon
-                onSetCurrentField={this.onSetCurrentField}
-                name='mobile'
-                text='Link To Phone'
-                value='phone'
-                hover={true}
-              />
-            </span>
-          )}
-
-          <SubDiv>
-            {!this.focus && (
-              <Button
-                setState={this.setHoverState.bind(this)}
-                iconName={this.currentIcon}
-                error={true}
-              />
+          <Container
+            class={`${!this.validator && this.focus ? 'validated' : ''}`}
+          >
+            {this.hoverShow && (
+              <div class='hoverState'>
+                <span class='popuptext show' id='myPopup' ref='tooltip'>
+                  <Icon
+                    onSetCurrentField={this.onSetCurrentField}
+                    name='envelope'
+                    text='Link To Email'
+                    value='email'
+                    hover={true}
+                  />
+                  <Icon
+                    onSetCurrentField={this.onSetCurrentField}
+                    name='file'
+                    text='Link To Page'
+                    value='page'
+                    hover={true}
+                  />
+                  <Icon
+                    onSetCurrentField={this.onSetCurrentField}
+                    name='mobile'
+                    text='Link To Phone'
+                    value='phone'
+                    hover={true}
+                  />
+                </span>
+              </div>
             )}
 
-            <input
-              onFocus={() => this.toggleFocus(true)}
-              onKeyup={(event: any) => {
-                this.checkField(event)
-              }}
-              value={this.inputValue}
-              type='type'
-              placeholder={this.defaultInput}
-              ref='input'
-            />
+            <SubDiv>
+              {!this.focus && (
+                <Button
+                  setState={this.setHoverState.bind(this)}
+                  iconName={this.currentIcon}
+                  error={true}
+                />
+              )}
 
-            {this.focus && (
-              <Button
-                setState={this.validator ? () => this.resetFocus() : () => {}}
-                iconName='check'
-                error={this.validator}
+              <input
+                onFocus={() => this.toggleFocus(true)}
+                onKeyup={(event: any) => {
+                  this.checkField(event)
+                }}
+                value={this.inputValue}
+                type='type'
+                placeholder={this.defaultInput}
+                ref='input'
               />
-            )}
-            {!this.focus && this.validator && (
-              <Button
-                setState={this.resetState.bind(this)}
-                iconName='trash'
-                error={true}
-              />
-            )}
 
-            {!this.focus && (
-              <Button
-                setState={this.setActiveState.bind(this)}
-                iconName='external-link-alt'
-                error={true}
-                active={this.active}
-              />
-            )}
-            {this.focus && (
-              <Button
-                setState={this.resetState.bind(this)}
-                iconName='times'
-                error={true}
-              />
-            )}
-          </SubDiv>
+              {this.focus && (
+                <Button
+                  setState={this.validator ? () => this.resetFocus() : () => {}}
+                  iconName='check'
+                  error={this.validator}
+                />
+              )}
+              {!this.focus && this.validator && (
+                <Button
+                  setState={this.resetState.bind(this)}
+                  iconName='trash'
+                  error={true}
+                />
+              )}
+
+              {!this.focus && (
+                <Button
+                  setState={this.setActiveState.bind(this)}
+                  iconName='external-link-alt'
+                  error={true}
+                  active={this.active}
+                />
+              )}
+              {this.focus && (
+                <Button
+                  setState={this.resetState.bind(this)}
+                  iconName='times'
+                  error={true}
+                />
+              )}
+            </SubDiv>
+          </Container>
         </ConditionalDiv>
-      </Container>
+      </div>
     )
   }
 }

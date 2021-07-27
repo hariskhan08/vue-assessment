@@ -5,15 +5,16 @@ export const Container = styled('div')`
     background-color: orange;
   }
   .activeClass {
-    background-color: grey;
+    background-color: rgb(73, 76, 83);
   }
   & > button {
     outline: 0;
     border: 0;
     background-color: var(--button-background);
+    padding: 10px;
   }
 
   & > button:hover {
-    background: grey;
+    background: rgb(188, 194, 203);
   }
 `

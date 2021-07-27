@@ -29,10 +29,12 @@ export default class Icon extends Vue {
 
 <style scoped>
 .hoverClass:hover {
-  background-color: grey;
+  background-color: rgb(240, 242, 246);
   cursor: pointer;
+  overflow: hidden;
 }
 .paragraph {
-  margin-left: 5px;
+  margin-left: 8px;
+  font-size: 13px;
 }
 </style>
